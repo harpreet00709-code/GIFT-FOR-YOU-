@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Small Surprise for You 🎁</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      padding: 16px 10px;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(251,191,36,.22) 0, transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(96,165,250,.20) 0, transparent 55%),
+        radial-gradient(circle at 0% 100%, rgba(190,242,100,.22) 0, transparent 55%),
+        linear-gradient(135deg, #f9fafb, #fefce8);
+      overflow-y: auto;
+      overflow-x: hidden;
+      color: #111827;
+    }
+
+    .page {
+      max-width: 840px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.96);
+      border-radius: 20px;
+      box-shadow: 0 18px 40px rgba(15,23,42,0.18);
+      border: 1px solid rgba(148,163,184,0.3);
+      padding: 18px 16px 18px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .corner {
+      position: absolute;
+      font-size: 1.8rem;
+      opacity: 0.45;
+      pointer-events: none;
+    }
+    .corner.tl { top: 10px; left: 10px; }
+    .corner.br { bottom: 10px; right: 12px; }
+
+    .header {
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .title .icon {
+      font-size: 1.6rem;
+    }
+
+    .tag {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    .highlight {
+      margin-top: 6px;
+      font-size: 0.85rem;
+      color: #374151;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: #eff6ff;
+      border: 1px dashed #bfdbfe;
+    }
+
+    .highlight span {
+      font-weight: 600;
+      color: #1d4ed8;
+    }
+
+    .form-body {
+      margin-top: 8px;
+      max-height: 65vh;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .field {
+      margin-bottom: 10px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #111827;
+    }
+
+    .field small {
+      display: block;
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-bottom: 3px;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      padding: 6px 9px;
+      font-size: 0.9rem;
+      outline: none;
+      background: #f9fafb;
+      transition: border 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37,99,235,0.18);
+      background: #ffffff;
+    }
+
+    textarea {
+      min-height: 50px;
+      resize: vertical;
+    }
+
+    .btn-row {
+      margin-top: 12px;
+      padding-top: 8px;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .status {
+      font-size: 0.8rem;
+      color: #6b7280;
+      min-height: 1rem;
+    }
+
+    .status.err { color: #b91c1c; }
+
+    button[type="submit"] {
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 12px 28px rgba(37,99,235,0.55);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 34px rgba(37,99,235,0.65);
+      opacity: 0.97;
+    }
+
+    button[type="submit"]:active {
+      transform: scale(0.97);
+      box-shadow: 0 9px 20px rgba(37,99,235,0.55);
+      opacity: 0.95;
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 12px 6px; }
+      .card { padding: 14px 10px 16px; }
+      .form-body { max-height: 70vh; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="corner tl">🌸</div>
+      <div class="corner br">🌼</div>
+
+      <div class="header">
+        <div class="title-row">
+          <div class="title">
+            <span class="icon">🎁</span>
+            <span>Small surprise for you</span>
+          </div>
+          <div class="tag">2 min · casual questions</div>
+        </div>
+        <div class="subtitle">
+          Bas normal questions hain. Sirf naam required hai, baaki jo comfortable ho wahi likhna. Koi right / wrong answer nahi. 🙂
+        </div>
+        <div class="highlight">
+          <span>Note:</span> last me ek chhota sa surprise screen milega agar tum ye short questions complete karte ho. 🔓✨
+        </div>
+      </div>
+
+      <form id="questionsForm">
+        <!-- Subject for email side (user ko dikhega nahi) -->
+        <input type="hidden" name="_subject" value="New 20-questions response" />
+
+        <div class="form-body">
+          <div class="field">
+            <label for="q1">1️⃣ Tumhara naam / nickname?</label>
+            <input type="text" id="q1" name="q1_name" required />
+          </div>
+
+          <div class="field">
+            <label for="q3">2️⃣ Tumhara BFF kaun hai? 👯‍♂️</label>
+            <input type="text" id="q3" name="q3_bff" />
+          </div>
+
+          <div class="field">
+            <label for="q4">3️⃣ Tumhein sabse zyada comfortable kiske saath feel hota hai? 🤝</label>
+            <input type="text" id="q4" name="q4_comfort_with" />
+          </div>
+
+          <div class="field">
+            <label for="q5">4️⃣ Tumhein kiske saath time spend karna sabse accha lagta hai? ⏰</label>
+            <input type="text" id="q5" name="q5_time_with" />
+          </div>
+
+          <div class="field">
+            <label for="q6">5️⃣ Tumhara favourite food / dish? 🍛</label>
+            <input type="text" id="q6" name="q6_food" />
+          </div>
+
+          <div class="field">
+            <label for="q7">6️⃣ Ghumne ke liye tumhein kaisa place pasand hai? 🌍</label>
+            <small>(hill station, beach, city, village, etc.)</small>
+            <input type="text" id="q7" name="q7_travel_place" />
+          </div>
+
+          <div class="field">
+            <label for="q8">7️⃣ Tumhari favourite movie / web series? 🎬</label>
+            <input type="text" id="q8" name="q8_movie" />
+          </div>
+
+          <div class="field">
+            <label for="q9">8️⃣ Tum kaunsi type ki music / songs zyada sunte ho? 🎧</label>
+            <input type="text" id="q9" name="q9_music" />
+          </div>
+
+          <div class="field">
+            <label for="q10">9️⃣ Sabse memorable din kaunsa tha tumhare liye? Kyun? 📅</label>
+            <textarea id="q10" name="q10_memorable_day"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="q11">🔟 3 log jinke bina life imagine nahi kar sakte? 👨‍👩‍👧</label>
+            <textarea id="q11" name="q11_three_people"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="q12">1️⃣1️⃣ Tum zyada introvert ho, extrovert ho ya beech mein? 🙂</label>
+            <input type="text" id="q12" name="q12_personality" />
+          </div>
+
+          <div class="field">
+            <label for="q13">1️⃣2️⃣ Abhi life ka sabse bada goal kya hai? 🎯</label>
+            <textarea id="q13" name="q13_goal"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="q14">1️⃣3️⃣ Ek habit jo tum change karna chahte ho apne andar? 🔄</label>
+            <textarea id="q14" name="q14_habit_change"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="q15">1️⃣4️⃣ Ek habit jo tumhe apne baare me proud feel karwati hai? 💪</label>
+            <textarea id="q15" name="q15_good_habit"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="q16">1️⃣5️⃣ Stress aata hai to usually kya karte ho? 😌</label>
+            <textarea id="q16" name="q16_stress_handle"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="q17">1️⃣6️⃣ Agar tum abhi kisi trip pe ja sakte, kahaan jaate? ✈️</label>
+            <input type="text" id="q17" name="q17_trip_now" />
+          </div>
+
+          <div class="field">
+            <label for="q18">1️⃣7️⃣ Mere saath koi aisi memory jo tumhe genuinely acchi lagti ho? 📸</label>
+            <textarea id="q18" name="q18_memory_with_me"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="q19">1️⃣8️⃣ Ek word me mujhe describe karo. 🔍</label>
+            <input type="text" id="q19" name="q19_one_word_me" />
+          </div>
+
+          <div class="field">
+            <label for="q20">1️⃣9️⃣ Last: jo bhi dil me hai, freely yahan likh do. ✍️</label>
+            <textarea id="q20" name="q20_anything"></textarea>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <div id="statusText" class="status"></div>
+          <button type="submit" id="submitBtn">
+            Done, surprise dikhao <span>➡️</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const FORM_ENDPOINT = "https://formspree.io/f/movoryrb";
+    const form = document.getElementById("questionsForm");
+    const statusText = document.getElementById("statusText");
+    const submitBtn = document.getElementById("submitBtn");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      statusText.textContent = "";
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+
+      const fd = new FormData(form);
+
+      try {
+        const res = await fetch(FORM_ENDPOINT, {
+          method: "POST",
+          body: fd,
+          headers: { Accept: "application/json" }
+        });
+
+        if (res.ok) {
+          // successful -> surprise page
+          window.location.href = "thankyou.html";
+        } else {
+          statusText.textContent = "Kuch issue aa gaya, thodi der baad try kar lena. 😅";
+          statusText.className = "status err";
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Done, surprise dikhao <span>➡️</span>';
+        }
+      } catch {
+        statusText.textContent = "Network issue aa gaya. Thoda baad phir try kar lena. 😕";
+        statusText.className = "status err";
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Done, surprise dikhao <span>➡️</span>';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your Little Gift 🎁</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(59,130,246,.28) 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(16,185,129,.25) 0, transparent 55%),
+        linear-gradient(135deg, #0f172a, #020617);
+      color: #e5e7eb;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .piece {
+      position: absolute;
+      font-size: 1.3rem;
+      animation: fall 4.5s linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-60px) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .card {
+      max-width: 460px;
+      width: 100%;
+      background: rgba(15,23,42,0.92);
+      border-radius: 22px;
+      padding: 22px 20px 20px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+      border: 1px solid rgba(148,163,184,0.5);
+      position: relative;
+      z-index: 1;
+    }
+
+    .title {
+      font-size: 1.7rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      color: #f9fafb;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(34,197,94,0.1);
+      color: #bbf7d0;
+      font-size: 0.75rem;
+      margin-bottom: 10px;
+    }
+
+    .badge span.icon {
+      font-size: 1rem;
+    }
+
+    .main-text {
+      font-size: 0.96rem;
+      line-height: 1.6;
+      color: #e5e7eb;
+      margin-bottom: 12px;
+    }
+
+    .main-text span.highlight {
+      color: #a5b4fc;
+      font-weight: 600;
+    }
+
+    .quote-box {
+      margin-top: 6px;
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(129,140,248,0.5);
+      font-size: 0.9rem;
+      color: #c7d2fe;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-box::before {
+      content: "“";
+      position: absolute;
+      font-size: 3rem;
+      top: -18px;
+      left: 10px;
+      color: rgba(129,140,248,0.35);
+    }
+
+    .quote-author {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    .note {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+
+    .note span {
+      color: #fde68a;
+    }
+
+    .back-hint {
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+
+    .back-hint strong {
+      color: #e5e7eb;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 18px 14px 16px;
+      }
+      .title {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="confetti" id="confetti"></div>
+
+  <div class="card">
+    <div class="title">Your little gift 🎁</div>
+
+    <div class="badge">
+      <span class="icon">🌟</span>
+      <span>Thanks for taking out a moment</span>
+    </div>
+
+    <div class="main-text">
+      Honestly, <span class="highlight">thanks</span> for patiently filling all those questions.
+      Har kisi ke paas itna patience nahi hota kisi ke liye time nikalne ka.
+      Isliye ye chhota sa screen tumhare liye “thank you” hai. 💫
+    </div>
+
+    <div class="main-text">
+      Tum chahe jitna casual socho, but fact ye hai ki tum jaise log
+      jinke saath normal baatein bhi comfortable lagti hain,
+      <span class="highlight">rare</span> hote hain. Agar life me kabhi khud pe doubt aaye,
+      to yaad rakhna: tum already kisi ke liye important ho.
+    </div>
+
+    <div class="quote-box">
+      Kabhi kabhi life me sabse bada gift ye hota hai ki
+      koi hmse normal si baatein bhi honestly share kare,
+      bina acting, bina mask ke.
+      <div class="quote-author">– bas ek chhota sa reminder tumhare liye 💛</div>
+    </div>
+
+    <div class="note">
+      Bas itna yaad rakhna: <span>tum jitne normal lagte ho, utne hi special ho</span>.
+      Aur haan, kabhi bhi apne aap ko underestimate mat karna.
+    </div>
+
+    <div class="back-hint">
+      <strong>PS:</strong> agar kabhi mood off ho, is page ko dobara open karke
+      yaad kar lena ki at least ek banda genuinely tumhare answers ko seriously leta hai. 🙂
+    </div>
+  </div>
+
+  <script>
+    // simple confetti hearts / stars
+    const confetti = document.getElementById("confetti");
+    const symbols = ["✨","⭐","🌸","💫","🌟"];
+
+    for (let i = 0; i < 40; i++) {
+      const span = document.createElement("span");
+      span.className = "piece";
+      span.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      const delay = Math.random() * 3;
+      const duration = 3 + Math.random() * 2;
+      const left = Math.random() * 100;
+
+      span.style.left = left + "vw";
+      span.style.animationDuration = duration + "s";
+      span.style.animationDelay = delay + "s";
+
+      confetti.appendChild(span);
+    }
+  </script>
+</body>
+</html>
